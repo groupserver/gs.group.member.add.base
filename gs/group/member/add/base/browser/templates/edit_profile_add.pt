@@ -9,7 +9,7 @@
       </tal:block>
     </title>
     <tal:block metal:fill-slot="metadata">
-      <link rel="up" href="#" 
+      <link rel="up" href="#"
             tal:attributes="href view/groupInfo/relativeURL;
                             title view/groupInfo/name"/>
     </tal:block>
@@ -27,37 +27,37 @@
                 tal:content="string:${view/siteInfo/name} Homepage">Home</span></a>
       </li>
       <li>
-        <a class="group" 
+        <a class="group"
            tal:attributes="href string:${view/groupInfo/relativeURL}/">
           <strong
             tal:content="view/groupInfo/name">This group</strong></a>
       </li>
       <li tal:content="view/label">Stuff</li>
     </ul>
-    <form metal:fill-slot="body" enctype="multipart/form-data"  method="post" 
+    <form metal:fill-slot="body" enctype="multipart/form-data"  method="post"
           action="." tal:attributes="action request/URL" id="edit-profile"
           class="gs-content-js-required">
       <h1 tal:content="view/label">Edit Profile</h1>
       <p>
         To add a new member to the group enter the user's details below
-        and click the 
+        and click the
         <samp class="button"
               tal:define="action python:[a for a in view.actions][0].label"
               tal:content="action">Big R</samp>
-        button.              
+        button.
         A new member will be created, and the member will be sent a
         notification letting him or her know they have been joined to
-        <span class="group" 
+        <span class="group"
               tal:content="python:view.groupInfo.name">this group</span>.
-        You must fill out all required fields below, which are marked 
+        You must fill out all required fields below, which are marked
         <span class="required"><label style="display:inline;margin:0px;">like
         this</label></span>.
       </p>
       <p class="alert">
-        This form should only be used when you have 
-        <strong>absolute certainty</strong> that the person wishes to be a 
+        This form should only be used when you have
+        <strong>absolute certainty</strong> that the person wishes to be a
         member of this group.
-        Otherwise, please use the 
+        Otherwise, please use the
         <a href="admin_join.html">Invite a New Group Member</a> form instead.
       </p>
       <div id="delivery" class="section">
@@ -75,14 +75,14 @@
       <div id="standardProfileFields" class="section">
         <h2>Standard Profile Information</h2>
         <p>The following fields are the standard profile fields on
-        <span class="site" 
+        <span class="site"
               tal:content="python:view.siteInfo.name">this site</span>.
-        You must fill out all required fields, but you can ignore 
+        You must fill out all required fields, but you can ignore
         the other fields.</p>
         <tal:block define="widgets view/requiredProfileWidgets">
           <tal:block
             replace="structure provider:groupserver.FormWidgets"/>
-        </tal:block>          
+        </tal:block>
       </div><!--standardProfileFields-->
       <div id="advancedProfileFields" class="disclosureWidget">
         <p>
