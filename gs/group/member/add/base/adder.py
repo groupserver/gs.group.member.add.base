@@ -17,8 +17,9 @@ from zope.component import createObject
 from zope.formlib import form
 from gs.group.member.base.utils import user_member_of_group
 from gs.group.member.join.interfaces import IGSJoiningUser
-from gs.profile.email.base.emailaddress import NewEmailAddress, \
-    EmailAddressExists
+from gs.profile.email.base import NewEmailAddress, EmailAddressExists, \
+    EmailUser
+from gs.profile.email.verify import EmailVerificationUser
 from Products.CustomUserFolder.userinfo import userInfo_to_anchor
 from Products.GSGroup.groupInfo import groupInfo_to_anchor
 from Products.GSProfile.utils import create_user_from_email, \
@@ -65,6 +66,15 @@ class Adder(object):
             auditor.info(status, toAddr)
             joininguser = IGSJoiningUser(userInfo)
             joininguser.silent_join(self.groupInfo)
+
+            # Verify the address <https://redmine.iopen.net/issues/4037>
+            eu = EmailUser(self.context, userInfo)
+            if not eu.is_address_verified(toAddr):
+                evu = EmailVerificationUser(self.context, userInfo, toAddr)
+                verificationId = evu.create_verification_id()
+                evu.add_verification_id(verificationId)
+                evu.verify_email(verificationId)
+
             m = '<li>Adding the existing participant with  the email '\
                 'address {email} &#8213; {user} &#8213; to {group}</li>'
         e = '<code class="email">{0}</code>'.format(toAddr)
