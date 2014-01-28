@@ -12,6 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from __future__ import unicode_literals
 from textwrap import TextWrapper
 from urllib import quote
 from zope.cachedescriptors.property import Lazy
@@ -45,7 +46,7 @@ class WelcomeHTMLNotification(GroupPage):
 
     @Lazy
     def unsub(self):
-        body = u'Please remove me from {}.'.format(self.groupInfo.name)
+        body = 'Please remove me from {}.'.format(self.groupInfo.name)
         m = 'mailto:{to}?Subject=Unsubscribe&body={body}'
         retval = m.format(to=self.email, body=quote(body.encode(UTF8)))
         return retval
@@ -54,10 +55,10 @@ class WelcomeHTMLNotification(GroupPage):
         subj = 'Group Welcome'
         uu = '{}{}'.format(self.siteInfo.url, user.url)
         au = '{}{}'.format(self.siteInfo.url, admin.url)
-        msg = u'Hello,\n\nI was added to the group {group} by {adminName}\n'\
-                u'and...\n\n--\nThis technical information may help you:\n  '\
-                u'Group          {url}\n  Me             {userUrl}\n  '\
-                u'Administrator  {adminUrl}\n'
+        msg = 'Hello,\n\nI was added to the group {group} by {adminName}\n'\
+                'and...\n\n--\nThis technical information may help you:\n  '\
+                'Group          {url}\n  Me             {userUrl}\n  '\
+                'Administrator  {adminUrl}\n'
         body = msg.format(group=self.groupInfo.name, url=self.groupInfo.url,
                                 adminName=admin.name, userUrl=uu, adminUrl=au)
         m = 'mailto:{to}?Subject={subj}&body={body}'

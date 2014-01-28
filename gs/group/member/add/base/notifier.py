@@ -12,6 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from __future__ import unicode_literals
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject, getMultiAdapter
 from gs.profile.notify import MessageSender
@@ -47,7 +48,7 @@ class Notifier(object):
 
     def notify(self, adminInfo, userInfo, fromAddr, toAddr, passwordLink):
         sender = MessageSender(self.context, userInfo)
-        subject = (u'Welcome to {}'.format(self.groupInfo.name)).encode(UTF8)
+        subject = ('Welcome to {}'.format(self.groupInfo.name)).encode(UTF8)
         text = self.textTemplate(adminInfo=adminInfo, userInfo=userInfo)
         html = self.htmlTemplate(adminInfo=adminInfo, userInfo=userInfo,
                                     passwordLink=passwordLink)

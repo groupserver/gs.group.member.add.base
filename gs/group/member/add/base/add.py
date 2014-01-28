@@ -12,7 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from __future__ import absolute_import
+from __future__ import absolute_import, unicode_literals
 import md5
 import time
 from zope.cachedescriptors.property import Lazy
@@ -33,7 +33,7 @@ from .notifier import Notifier as NotifyAdd
 
 
 class AddEditProfileForm(GroupForm):
-    label = u'Add a new group member'
+    label = 'Add a new group member'
     pageTemplateFileName = 'browser/templates/edit_profile_add.pt'
     template = ZopeTwoPageTemplateFile(pageTemplateFileName)
 
@@ -66,7 +66,7 @@ class AddEditProfileForm(GroupForm):
             self.request, form=self, data=data,
             ignore_request=ignore_request)
 
-    @form.action(label=u'Add', failure='handle_add_action_failure')
+    @form.action(label='Add', failure='handle_add_action_failure')
     def handle_add(self, action, data):
         adder = Adder(self.context, self.groupInfo, self.adminInfo)
         toAddr = data['toAddr'].strip()
@@ -93,9 +93,9 @@ class AddEditProfileForm(GroupForm):
 
     def handle_add_action_failure(self, action, data, errors):
         if len(errors) == 1:
-            self.status = u'<p>There is an error:</p>'
+            self.status = '<p>There is an error:</p>'
         else:
-            self.status = u'<p>There are errors:</p>'
+            self.status = '<p>There are errors:</p>'
 
     @Lazy
     def addFields(self):

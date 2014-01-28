@@ -12,6 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from __future__ import unicode_literals
 from pytz import UTC
 from datetime import datetime
 from zope.component.interfaces import IFactory
@@ -34,8 +35,8 @@ ADD_EXISTING_MEMBER = '3'
 class AuditEventFactory(object):
     implements(IFactory)
 
-    title = u'User Profile Add Audit-Event Factory'
-    description = u'Creates a GroupServer audit event for user add'
+    title = 'User Profile Add Audit-Event Factory'
+    description = 'Creates a GroupServer audit event for user add'
 
     def __call__(self, context, event_id, code, date, userInfo,
         instanceUserInfo, siteInfo, groupInfo, instanceDatum='',
@@ -79,28 +80,31 @@ class AddNewUserEvent(BasicAuditEvent):
           siteInfo, groupInfo, instanceDatum, supplementaryDatum,
           SUBSYSTEM)
 
+    def __unicode__(self):
+        retval = 'Administrator %s (%s) adding a new user %s (%s) '\
+                  'with address <%s> to join %s (%s) on %s (%s)' %\
+              (self.userInfo.name, self.userInfo.id,
+              self.instanceUserInfo.name, self.instanceUserInfo.id,
+              self.instanceDatum,
+              self.groupInfo.name, self.groupInfo.id,
+              self.siteInfo.name, self.siteInfo.id)
+        return retval
+
     def __str__(self):
-        retval = u'Administrator %s (%s) adding a new user %s (%s) '\
-          u'with address <%s> to join %s (%s) on %s (%s)' %\
-          (self.userInfo.name, self.userInfo.id,
-          self.instanceUserInfo.name, self.instanceUserInfo.id,
-          self.instanceDatum,
-          self.groupInfo.name, self.groupInfo.id,
-          self.siteInfo.name, self.siteInfo.id)
-        return retval.encode('ascii', 'ignore')
+        return unicode(self).encode('ascii', 'ignore')
 
     @property
     def xhtml(self):
-        cssClass = u'audit-event profile-add-event-{}'.format(self.code)
-        email = u'<code class="email">{}</code>'.format(self.instanceDatum)
-        m = u'<span class="{cssClass}">Adding the new user {user} (with the '\
-            u'email address {email}) to join {group}.</span>'
+        cssClass = 'audit-event profile-add-event-{}'.format(self.code)
+        email = '<code class="email">{}</code>'.format(self.instanceDatum)
+        m = '<span class="{cssClass}">Adding the new user {user} (with the '\
+            'email address {email}) to join {group}.</span>'
         retval = m.format(cssClass=cssClass, email=email,
                             user=userInfo_to_anchor(self.instanceUserInfo),
                             group=groupInfo_to_anchor(self.groupInfo))
         if ((self.instanceUserInfo.id != self.userInfo.id)
             and not(self.userInfo.anonymous)):
-            retval = u'{} &#8212; {}'.format(retval,
+            retval = '{} &#8212; {}'.format(retval,
                                             userInfo_to_anchor(self.userInfo))
         return retval
 
@@ -120,27 +124,30 @@ class AddOldUserEvent(BasicAuditEvent):
           siteInfo, groupInfo, instanceDatum, supplementaryDatum,
           SUBSYSTEM)
 
-    def __str__(self):
-        retval = u'Administrator %s (%s) adding an existing user '\
-          u'%s (%s) with address <%s> to join %s (%s) on %s (%s)' %\
+    def __unicode__(self):
+        retval = 'Administrator %s (%s) adding an existing user '\
+                  '%s (%s) with address <%s> to join %s (%s) on %s (%s)' %\
           (self.userInfo.name, self.userInfo.id,
           self.instanceUserInfo.name, self.instanceUserInfo.id,
           self.instanceDatum,
           self.groupInfo.name, self.groupInfo.id,
           self.siteInfo.name, self.siteInfo.id)
-        return retval.encode('ascii', 'ignore')
+        return retval
+
+    def __str__(self):
+        return unicode(self).encode('ascii', 'ignore')
 
     @property
     def xhtml(self):
-        cssClass = u'audit-event profile-add-event-{}'.format(self.code)
-        m = u'<span class="{cssClass}">Adding the existing user {cssClass} '\
-            u'to join {group}</span>'
+        cssClass = 'audit-event profile-add-event-{}'.format(self.code)
+        m = '<span class="{cssClass}">Adding the existing user {cssClass} '\
+            'to join {group}</span>'
         retval = m.format(cssClass=cssClass,
                             user=userInfo_to_anchor(self.instanceUserInfo),
                             group=groupInfo_to_anchor(self.groupInfo))
         if ((self.instanceUserInfo.id != self.userInfo.id)
             and not(self.userInfo.anonymous)):
-            retval = u'{} &#8212; {}'.format(retval,
+            retval = '{} &#8212; {}'.format(retval,
                                             userInfo_to_anchor(self.userInfo))
         return retval
 
@@ -161,27 +168,30 @@ class AddExistingMemberEvent(BasicAuditEvent):
           siteInfo, groupInfo, instanceDatum, supplementaryDatum,
           SUBSYSTEM)
 
-    def __str__(self):
-        retval = u'Administrator %s (%s) tried to add an existing '\
-          u'group member %s (%s) with address <%s> to join %s (%s) '\
-          u'on %s (%s)' %\
+    def __unicode__(self):
+        retval = 'Administrator %s (%s) tried to add an existing '\
+                  'group member %s (%s) with address <%s> to join %s (%s) '\
+                  'on %s (%s)' %\
           (self.userInfo.name, self.userInfo.id,
           self.instanceUserInfo.name, self.instanceUserInfo.id,
           self.instanceDatum,
           self.groupInfo.name, self.groupInfo.id,
           self.siteInfo.name, self.siteInfo.id)
-        return retval.encode('ascii', 'ignore')
+        return retval
+
+    def __str__(self):
+        return unicode(self).encode('ascii', 'ignore')
 
     @property
     def xhtml(self):
-        cssClass = u'audit-event profile-add-event-%s' % self.code
-        retval = u'<span class="%s">Tried to add the existing member '\
-            u' %s to join %s.</span>' %\
+        cssClass = 'audit-event profile-add-event-%s' % self.code
+        retval = '<span class="%s">Tried to add the existing member '\
+            ' %s to join %s.</span>' %\
             (cssClass, userInfo_to_anchor(self.instanceUserInfo),
             groupInfo_to_anchor(self.groupInfo))
         if ((self.instanceUserInfo.id != self.userInfo.id)
             and not(self.userInfo.anonymous)):
-            retval = u'%s &#8212; %s' %\
+            retval = '%s &#8212; %s' %\
               (retval, userInfo_to_anchor(self.userInfo))
         return retval
 
