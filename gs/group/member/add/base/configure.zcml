@@ -3,6 +3,8 @@
            xmlns:browser="http://namespaces.zope.org/browser"
            i18n_domain="groupserver">
 
+  <include package="zope.viewlet" file="meta.zcml" />
+
   <!-- The Add Member page -->
   <browser:page
     name="admin_add.html"
