@@ -140,8 +140,8 @@ class AddOldUserEvent(BasicAuditEvent):
     @property
     def xhtml(self):
         cssClass = 'audit-event profile-add-event-{}'.format(self.code)
-        m = '<span class="{cssClass}">Adding the existing user {cssClass} '\
-            'to join {group}</span>'
+        m = '<span class="{cssClass}">Adding the existing user {user} '\
+            'to {group}</span>'
         retval = m.format(cssClass=cssClass,
                             user=userInfo_to_anchor(self.instanceUserInfo),
                             group=groupInfo_to_anchor(self.groupInfo))
