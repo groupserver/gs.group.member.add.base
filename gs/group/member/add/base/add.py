@@ -24,7 +24,7 @@ from gs.content.form import select_widget
 from gs.group.base import GroupForm
 from gs.group.member.join.notify import NotifyNewMember as NotifyJoin,\
     NotifyAdmin
-from gs.profile.email.base.emailuser import EmailUser
+from gs.profile.email.base import EmailUser, sanitise_address
 from gs.profile.password.interfaces import IGSPasswordUser
 from .addfields import AddFields
 from .adder import Adder
@@ -69,15 +69,14 @@ class AddEditProfileForm(GroupForm):
     @form.action(label='Add', failure='handle_add_action_failure')
     def handle_add(self, action, data):
         adder = Adder(self.context, self.groupInfo, self.adminInfo)
-        toAddr = data['toAddr'].strip()
+        toAddr = sanitise_address(data['toAddr'])
         msg, userInfo, status = adder.add(toAddr, data)
         self.status = '<ul>\n{0}\n</ul>'.format(msg)
 
         # Tell the user
         if status == ADD_NEW_USER:
             notifier = NotifyAdd(self.context, self.request)
-            fromAddr = data['fromAddr']
-            toAddr = data['toAddr']
+            fromAddr = sanitise_address(data['fromAddr'])
             passwd = self.get_password_reset(userInfo, toAddr)
             notifier.notify(self.adminInfo, userInfo, fromAddr, toAddr, passwd)
         elif status == ADD_OLD_USER:
