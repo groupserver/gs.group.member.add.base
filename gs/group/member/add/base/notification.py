@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright © 2014 OnlineGroups.net and Contributors.
+# Copyright © 2013, 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
@@ -102,10 +102,12 @@ class WelcomeTXTNotification(WelcomeHTMLNotification):
         self.tw = TextWrapper()\
 
         response = request.response
-        response.setHeader("Content-Type", 'text/plain; charset=UTF-8')
-        filename = 'welcome-to-%s.txt' % self.groupInfo.name
-        response.setHeader('Content-Disposition',
-                            'inline; filename="%s"' % filename)
+        h = 'text/plain; charset=UTF-8'.encode('ascii', 'ignore')
+        response.setHeader("Content-Type".encode('ascii', 'ignore'), h)
+        filename = 'welcome-to-{0}-{1}.txt'.format(self.siteInfo.id,
+                                                    self.groupInfo.id)
+        h = 'inline; filename="{0}"'.format(filename).encode('ascii', 'ignore')
+        response.setHeader('Content-Disposition'.encode('ascii', 'ignore'), h)
 
     def format_message(self, m):
         retval = self.tw.fill(m)
