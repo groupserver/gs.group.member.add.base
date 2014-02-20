@@ -4,7 +4,7 @@
               adminInfo options/adminInfo | view/loggedInUserInfo;">Dear <tal:block content="userInfo/name">New Member</tal:block>,
 
 <tal:block define="m string:Welcome to ${view/groupInfo/name}: an online group that you can use with email or the Web. ${adminInfo/name} has created a profile for you, so you participate in this group strait away."
-  content="python:view.format_message(m)" />
+  content="python:view.fill(m)" />
 
   * You can read the posts from the other members of the group.
     You will receive an email whenever a member makes a post.

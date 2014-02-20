@@ -102,7 +102,3 @@ class WelcomeTXTNotification(WelcomeHTMLNotification, TextMixin):
         filename = 'welcome-to-{0}-{1}.txt'.format(self.siteInfo.id,
                                                     self.groupInfo.id)
         self.set_header(filename)
-
-    def format_message(self, m):
-        retval = self.fill(m)
-        return retval
