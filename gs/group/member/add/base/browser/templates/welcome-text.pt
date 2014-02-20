@@ -1,4 +1,4 @@
-<tal:block 
+<tal:block
   tal:define="passwordLink options/passwordLink | view/loggedInUserInfo/url;
               userInfo options/userInfo | view/loggedInUserInfo;
               adminInfo options/adminInfo | view/loggedInUserInfo;">Dear <tal:block content="userInfo/name">New Member</tal:block>,
@@ -8,16 +8,16 @@
 
   * You can read the posts from the other members of the group.
     You will receive an email whenever a member makes a post.
-    The email messages are easy to spot: the <em>subject</em> will 
+    The email messages are easy to spot: the <em>subject</em> will
     start with <tal:block content="view/subj">the list title</tal:block>.
 
   * You can post to the group by sending an email to
     <tal:block content="view/email"/>
-    The other members will receive your post, and it will be added to 
+    The other members will receive your post, and it will be added to
     the online archive.
 
-  * Set a password to gain access to your profile. You will also gain 
-    access to the rich features on the Web, including an archive of 
+  * Set a password to gain access to your profile. You will also gain
+    access to the rich features on the Web, including an archive of
     posts that you can search and browse.
 
   * You can leave at any time by sending an email to

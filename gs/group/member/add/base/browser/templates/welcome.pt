@@ -12,7 +12,7 @@
   <body style="font:13px Trebuchet,'Trebuchet MS',arial,helvetica,clean,sans-serif;line-height:1.385;color:black;background:white;">
     <h1 style="width:100%;border-bottom:thick solid black;margin-bottom:0.692em;"><a href="#"
       style="color:black;text-decoration:none;"
-      tal:attributes="href view/siteInfo/url" 
+      tal:attributes="href view/siteInfo/url"
       tal:content="view/siteInfo/name">Site</a></h1>
     <h2 style="font-size:207.7%;margin:0 0 1em 0;"
         tal:content="view/groupInfo/name">This Group</h2>
@@ -35,8 +35,8 @@
       <li>
         You will receive an email whenever a member makes a post to the
         group.
-        The email messages are easy to spot: the <em>subject</em> will 
-        start with 
+        The email messages are easy to spot: the <em>subject</em> will
+        start with
         <code tal:content="view/subj">the list title</code>.
       </li>
       <!--   - You can post to the group -->
@@ -51,7 +51,7 @@
       </li>
       <!--   - You can leave -->
       <li>
-        You can leave <span tal:content="view/groupInfo/name">This Group</span> 
+        You can leave <span tal:content="view/groupInfo/name">This Group</span>
         at any time by sending an email to
         <a tal:attributes="href view/unsub"
            href="#"><code tal:content="view/email">some email address</code></a>
@@ -63,7 +63,7 @@
       <!--   - You can set a password, and change things -->
       <a tal:attributes="href passwordLink"
          href="#">Set a password</a>
-      to gain access to the rich features of 
+      to gain access to the rich features of
       <span tal:content="view/groupInfo/name">This Group</span> on the web.
     </p>
     <table style="margin: 1.385em 0 1.385em 0;font:13px Trebuchet,'Trebuchet MS',arial,helvetica,clean,sans-serif;line-height:1.385;">
@@ -71,7 +71,7 @@
         <tr>
           <td style="width:45%;">
             <p>
-              View the <strong>profiles</strong> of the members, 
+              View the <strong>profiles</strong> of the members,
               including:
             </p>
             <ul>
@@ -81,7 +81,7 @@
               </tal:block>
               <li>
                 The profile that
-                <span tal:content="adminInfo/name">The Administrator</span> 
+                <span tal:content="adminInfo/name">The Administrator</span>
                 created for you</li>
             </ul>
           </td>
@@ -108,17 +108,17 @@
     <!--Website address-->
     <p style="margin: 1.385em 0 1.385em 0;">
       Kind regards<br/>
-      <span style="padding:0 0 0 1.385em;">The 
-        <span tal:content="view/siteInfo/name">Site</span> 
+      <span style="padding:0 0 0 1.385em;">The
+        <span tal:content="view/siteInfo/name">Site</span>
       Team</span>
     </p>
     <hr/>
     <!--Terms and conditions-->
     <p style="margin: 1.385em 0 1.385em 0;">
       <a tal:attributes="href string:${view/siteInfo/url}/policies/privacy"
-        href="#">Privacy</a> | 
+        href="#">Privacy</a> |
       <a tal:attributes="href string:${view/siteInfo/url}/policies/aup"
-        href="#">Acceptable Use</a> | 
+        href="#">Acceptable Use</a> |
       <a tal:attributes="href string:${view/siteInfo/url}/policies/tos"
         href="#">Terms of Service</a>
     </p>
