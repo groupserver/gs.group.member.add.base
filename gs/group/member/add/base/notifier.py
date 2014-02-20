@@ -15,6 +15,7 @@
 from __future__ import unicode_literals
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject, getMultiAdapter
+from gs.core import to_ascii
 from gs.profile.notify import MessageSender
 UTF8 = 'utf-8'
 
@@ -54,4 +55,5 @@ class Notifier(object):
                                     passwordLink=passwordLink)
         sender.send_message(subject, text, html, fromAddr, [toAddr])
 
-        self.request.response.setHeader('Content-Type', self.oldContentType)
+        self.request.response.setHeader(to_ascii('Content-Type'),
+                                        to_ascii(self.oldContentType))
