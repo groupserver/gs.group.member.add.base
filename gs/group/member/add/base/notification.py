@@ -13,21 +13,21 @@
 #
 ##############################################################################
 from __future__ import unicode_literals
-from textwrap import TextWrapper
 from urllib import quote
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
 from Products.GSGroupMember.groupmembership import GroupMembers
-from gs.group.base import GroupPage
+from gs.content.email.base import GroupEmail, TextMixin
 from gs.group.member.list.queries import MembersQuery
 from gs.group.messages.topics.queries import TopicsQuery
 UTF8 = 'utf-8'
 
 
-class WelcomeHTMLNotification(GroupPage):
+class WelcomeHTMLNotification(GroupEmail):
 
     def __init__(self, group, request):
         super(WelcomeHTMLNotification, self).__init__(group, request)
+        self.group = group
 
     @Lazy
     def mailingList(self):
@@ -95,20 +95,14 @@ class WelcomeHTMLNotification(GroupPage):
         return retval
 
 
-class WelcomeTXTNotification(WelcomeHTMLNotification):
+class WelcomeTXTNotification(WelcomeHTMLNotification, TextMixin):
 
     def __init__(self, group, request):
         super(WelcomeTXTNotification, self).__init__(group, request)
-        self.tw = TextWrapper()\
-
-        response = request.response
-        h = 'text/plain; charset=UTF-8'.encode('ascii', 'ignore')
-        response.setHeader("Content-Type".encode('ascii', 'ignore'), h)
         filename = 'welcome-to-{0}-{1}.txt'.format(self.siteInfo.id,
                                                     self.groupInfo.id)
-        h = 'inline; filename="{0}"'.format(filename).encode('ascii', 'ignore')
-        response.setHeader('Content-Disposition'.encode('ascii', 'ignore'), h)
+        self.set_header(filename)
 
     def format_message(self, m):
-        retval = self.tw.fill(m)
+        retval = self.fill(m)
         return retval
