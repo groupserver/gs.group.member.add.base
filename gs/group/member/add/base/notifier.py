@@ -27,7 +27,8 @@ class Notifier(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self.oldContentType = self.request.response.getHeader('Content-Type')
+        h = self.request.response.getHeader('Content-Type')
+        self.oldContentType = to_ascii(h if h else 'text/html')
 
     @Lazy
     def groupInfo(self):
