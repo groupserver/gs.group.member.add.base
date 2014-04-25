@@ -64,7 +64,7 @@ setup(name='gs.group.member.add.base',
         'gs.group.base',
         'gs.group.member.base',
         'gs.group.member.info',  # For the admin-links
-        'gs.group.member.invite',
+        'gs.group.member.invite.base',
         'gs.group.member.join',
         'gs.group.member.list',
         'gs.group.member.viewlet',
