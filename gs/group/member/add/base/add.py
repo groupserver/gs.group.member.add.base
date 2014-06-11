@@ -20,7 +20,7 @@ from zope.formlib import form
 from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
 from Products.GSProfile.edit_profile import wym_editor_widget
 from Products.XWFCore.XWFUtils import convert_int2b62
-from gs.content.form import select_widget
+from gs.content.form.base import select_widget
 from gs.group.base import GroupForm
 from gs.group.member.join.notify import NotifyNewMember as NotifyJoin,\
     NotifyAdmin
