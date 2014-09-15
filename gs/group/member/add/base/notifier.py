@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,50 +11,27 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import unicode_literals
-from zope.cachedescriptors.property import Lazy
-from zope.component import createObject, getMultiAdapter
-from gs.core import to_ascii
+from zope.i18n import translate
+from gs.content.email.base import GroupNotifierABC
 from gs.profile.notify import MessageSender
-UTF8 = 'utf-8'
+from . import GSMessageSender as _
 
 
-class Notifier(object):
+class Notifier(GroupNotifierABC):
     htmlTemplateName = 'gs-group-member-add-welcome.html'
     textTemplateName = 'gs-group-member-add-welcome.txt'
 
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-        h = self.request.response.getHeader('Content-Type')
-        self.oldContentType = to_ascii(h if h else 'text/html')
-
-    @Lazy
-    def groupInfo(self):
-        retval = createObject('groupserver.GroupInfo', self.context)
-        assert retval, 'Could not create the GroupInfo from %s' % self.context
-        return retval
-
-    @Lazy
-    def htmlTemplate(self):
-        retval = getMultiAdapter((self.context, self.request),
-                                    name=self.htmlTemplateName)
-        return retval
-
-    @Lazy
-    def textTemplate(self):
-        retval = getMultiAdapter((self.context, self.request),
-                                    name=self.textTemplateName)
-        return retval
-
     def notify(self, adminInfo, userInfo, fromAddr, toAddr, passwordLink):
-        sender = MessageSender(self.context, userInfo)
-        subject = ('Welcome to {}'.format(self.groupInfo.name)).encode(UTF8)
+        subject = _('welcome-subject', 'Welcome to ${groupName}',
+                    mapping={'groupName': self.groupInfo.name})
+        translatedSubject = translate(subject)
         text = self.textTemplate(adminInfo=adminInfo, userInfo=userInfo)
         html = self.htmlTemplate(adminInfo=adminInfo, userInfo=userInfo,
-                                    passwordLink=passwordLink)
-        sender.send_message(subject, text, html, fromAddr, [toAddr])
+                                 passwordLink=passwordLink)
 
-        self.request.response.setHeader(to_ascii('Content-Type'),
-                                        to_ascii(self.oldContentType))
+        sender = MessageSender(self.context, userInfo)
+        sender.send_message(translatedSubject, text, html, fromAddr,
+                            [toAddr])
+        self.reset_content_type()
