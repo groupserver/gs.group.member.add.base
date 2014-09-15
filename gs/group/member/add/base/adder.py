@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,7 +11,7 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import absolute_import, unicode_literals
 from zope.component import createObject
 from zope.formlib import form
@@ -53,14 +53,14 @@ class Adder(object):
             raise LookupError(m)
         # get the user object in the context of the group and site
         userInfo = createObject('groupserver.UserFromId', self.context,
-                                  user.getId())
+                                user.getId())
         auditor = self.get_auditor(userInfo)
         if user_member_of_group(user, self.groupInfo):
             status = ADD_EXISTING_MEMBER
             auditor.info(status, toAddr)
             m = '<li>The person with the email address {email} &#8213; '\
-                '{user} &#8213; is already a member of {group}. No changes '\
-                'to the profile of {user} have been made.</li>'
+                '{user} &#8213; is already a member of {group}. No '\
+                'changes to the profile of {user} have been made.</li>'
         else:
             status = ADD_OLD_USER
             auditor.info(status, toAddr)
@@ -79,7 +79,7 @@ class Adder(object):
                 'address {email} &#8213; {user} &#8213; to {group}</li>'
         e = '<code class="email">{0}</code>'.format(toAddr)
         msg = m.format(email=e, user=userInfo_to_anchor(userInfo),
-                        group=groupInfo_to_anchor(self.groupInfo))
+                       group=groupInfo_to_anchor(self.groupInfo))
         retval = (msg, userInfo, status)
         return retval
 
@@ -123,6 +123,6 @@ class Adder(object):
 
     def get_auditor(self, userInfo):
         auditor = Auditor(self.groupInfo.siteInfo, self.groupInfo,
-                    self.adminInfo, userInfo)
+                          self.adminInfo, userInfo)
 
         return auditor

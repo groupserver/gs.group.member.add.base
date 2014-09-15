@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2013, 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,7 +11,7 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import unicode_literals
 from urllib import quote
 from zope.cachedescriptors.property import Lazy
@@ -56,14 +56,14 @@ class WelcomeHTMLNotification(GroupEmail):
         uu = '{}{}'.format(self.siteInfo.url, user.url)
         au = '{}{}'.format(self.siteInfo.url, admin.url)
         msg = 'Hello,\n\nI was added to the group {group} by {adminName}\n'\
-                'and...\n\n--\nThis technical information may help you:\n  '\
-                'Group          {url}\n  Me             {userUrl}\n  '\
-                'Administrator  {adminUrl}\n'
+              'and...\n\n--\nThis technical information may help you:\n  '\
+              'Group          {url}\n  Me             {userUrl}\n  '\
+              'Administrator  {adminUrl}\n'
         body = msg.format(group=self.groupInfo.name, url=self.groupInfo.url,
-                                adminName=admin.name, userUrl=uu, adminUrl=au)
+                          adminName=admin.name, userUrl=uu, adminUrl=au)
         m = 'mailto:{to}?Subject={subj}&body={body}'
         retval = m.format(to=self.email, subj=quote(subj),
-                            body=quote(body.encode(UTF8)))
+                          body=quote(body.encode(UTF8)))
         return retval
 
     @Lazy
@@ -78,7 +78,8 @@ class WelcomeHTMLNotification(GroupEmail):
         '''Get the names of the top-3 posting members, who are not the newly
         added user or the administrator.'''
         q = MembersQuery()
-        memberIds = q.posting_authors(self.siteInfo.id, self.groupInfo.id, 6)
+        memberIds = q.posting_authors(self.siteInfo.id, self.groupInfo.id,
+                                      6)
         try:
             memberIds.remove(admin.id)
         except ValueError:
@@ -90,7 +91,7 @@ class WelcomeHTMLNotification(GroupEmail):
 
         members = GroupMembers(self.context)
         names = [members.getTermByToken(m).title for m in memberIds
-                    if (m and (m in members))]
+                 if (m and (m in members))]
         retval = names[:3]
         return retval
 
@@ -100,5 +101,5 @@ class WelcomeTXTNotification(WelcomeHTMLNotification, TextMixin):
     def __init__(self, group, request):
         super(WelcomeTXTNotification, self).__init__(group, request)
         filename = 'welcome-to-{0}-{1}.txt'.format(self.siteInfo.id,
-                                                    self.groupInfo.id)
+                                                   self.groupInfo.id)
         self.set_header(filename)

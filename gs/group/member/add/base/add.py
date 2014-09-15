@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,7 +11,7 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import absolute_import, unicode_literals
 import md5
 import time
@@ -43,7 +43,7 @@ class AddEditProfileForm(GroupForm):
     @Lazy
     def form_fields(self):
         retval = form.Fields(self.addFields.adminInterface,
-                            render_context=False)
+                             render_context=False)
         retval['tz'].custom_widget = select_widget
         retval['biography'].custom_widget = wym_editor_widget
         return retval
@@ -78,7 +78,8 @@ class AddEditProfileForm(GroupForm):
             notifier = NotifyAdd(self.context, self.request)
             fromAddr = sanitise_address(data['fromAddr'])
             passwd = self.get_password_reset(userInfo, toAddr)
-            notifier.notify(self.adminInfo, userInfo, fromAddr, toAddr, passwd)
+            notifier.notify(self.adminInfo, userInfo, fromAddr, toAddr,
+                            passwd)
         elif status == ADD_OLD_USER:
             notifier = NotifyJoin(self.context, self.request)
             notifier.notify(userInfo)

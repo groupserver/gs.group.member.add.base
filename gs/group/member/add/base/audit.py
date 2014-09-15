@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,7 +11,7 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import unicode_literals
 from pytz import UTC
 from datetime import datetime
@@ -19,8 +19,8 @@ from zope.component.interfaces import IFactory
 from zope.interface import implements, implementedBy
 from Products.CustomUserFolder.userinfo import userInfo_to_anchor
 from Products.GSGroup.groupInfo import groupInfo_to_anchor
-from Products.GSAuditTrail import IAuditEvent, BasicAuditEvent, \
-  AuditQuery, event_id_from_data
+from Products.GSAuditTrail import (IAuditEvent, BasicAuditEvent,
+                                   AuditQuery, event_id_from_data)
 
 SUBSYSTEM = 'gs.group.member.add'
 import logging
@@ -39,25 +39,28 @@ class AuditEventFactory(object):
     description = 'Creates a GroupServer audit event for user add'
 
     def __call__(self, context, event_id, code, date, userInfo,
-        instanceUserInfo, siteInfo, groupInfo, instanceDatum='',
-        supplementaryDatum='', subsystem=''):
+                 instanceUserInfo, siteInfo, groupInfo, instanceDatum='',
+                 supplementaryDatum='', subsystem=''):
 
         if (code == ADD_NEW_USER):
-            event = AddNewUserEvent(context, event_id, date,
-              userInfo, instanceUserInfo, siteInfo, groupInfo,
-              instanceDatum, supplementaryDatum)
+            event = AddNewUserEvent(context, event_id, date, userInfo,
+                                    instanceUserInfo, siteInfo, groupInfo,
+                                    instanceDatum, supplementaryDatum)
         elif (code == ADD_OLD_USER):
-            event = AddOldUserEvent(context, event_id, date,
-              userInfo, instanceUserInfo, siteInfo, groupInfo,
-              instanceDatum, supplementaryDatum)
+            event = AddOldUserEvent(context, event_id, date, userInfo,
+                                    instanceUserInfo, siteInfo, groupInfo,
+                                    instanceDatum, supplementaryDatum)
         elif (code == ADD_EXISTING_MEMBER):
             event = AddExistingMemberEvent(context, event_id, date,
-              userInfo, instanceUserInfo, siteInfo, groupInfo,
-              instanceDatum, supplementaryDatum)
+                                           userInfo, instanceUserInfo,
+                                           siteInfo, groupInfo,
+                                           instanceDatum,
+                                           supplementaryDatum)
         else:
             event = BasicAuditEvent(context, event_id, UNKNOWN, date,
-              userInfo, instanceUserInfo, siteInfo, groupInfo,
-              instanceDatum, supplementaryDatum, SUBSYSTEM)
+                                    userInfo, instanceUserInfo, siteInfo,
+                                    groupInfo, instanceDatum,
+                                    supplementaryDatum, SUBSYSTEM)
         assert event
         return event
 
@@ -72,40 +75,37 @@ class AddNewUserEvent(BasicAuditEvent):
     """
     implements(IAuditEvent)
 
-    def __init__(self, context, id, d, userInfo, instanceUserInfo,
-        siteInfo, groupInfo, instanceDatum, supplementaryDatum):
+    def __init__(self, context, id, d, userInfo, instanceUserInfo, siteInfo,
+                 groupInfo, instanceDatum, supplementaryDatum):
 
-        BasicAuditEvent.__init__(self, context, id,
-          ADD_NEW_USER, d, userInfo, instanceUserInfo,
-          siteInfo, groupInfo, instanceDatum, supplementaryDatum,
-          SUBSYSTEM)
+        BasicAuditEvent.__init__(self, context, id, ADD_NEW_USER, d,
+                                 userInfo, instanceUserInfo, siteInfo,
+                                 groupInfo, instanceDatum,
+                                 supplementaryDatum, SUBSYSTEM)
 
     def __unicode__(self):
-        retval = 'Administrator %s (%s) adding a new user %s (%s) '\
-                  'with address <%s> to join %s (%s) on %s (%s)' %\
-              (self.userInfo.name, self.userInfo.id,
-              self.instanceUserInfo.name, self.instanceUserInfo.id,
-              self.instanceDatum,
-              self.groupInfo.name, self.groupInfo.id,
-              self.siteInfo.name, self.siteInfo.id)
+        r = 'Administrator %s (%s) adding a new user %s (%s) '\
+            'with address <%s> to join %s (%s) on %s (%s)'
+        retval = r.format(self.userInfo.name, self.userInfo.id,
+                          self.instanceUserInfo.name,
+                          self.instanceUserInfo.id, self.instanceDatum,
+                          self.groupInfo.name, self.groupInfo.id,
+                          self.siteInfo.name, self.siteInfo.id)
         return retval
-
-    def __str__(self):
-        return unicode(self).encode('ascii', 'ignore')
 
     @property
     def xhtml(self):
-        cssClass = 'audit-event profile-add-event-{}'.format(self.code)
+        cssClass = 'audit-event profile-add-event-{0}'.format(self.code)
         email = '<code class="email">{}</code>'.format(self.instanceDatum)
-        m = '<span class="{cssClass}">Adding the new user {user} (with the '\
-            'email address {email}) to join {group}.</span>'
+        m = '<span class="{cssClass}">Adding the new user {user} (with '\
+            'the email address {email}) to join {group}.</span>'
         retval = m.format(cssClass=cssClass, email=email,
-                            user=userInfo_to_anchor(self.instanceUserInfo),
-                            group=groupInfo_to_anchor(self.groupInfo))
+                          user=userInfo_to_anchor(self.instanceUserInfo),
+                          group=groupInfo_to_anchor(self.groupInfo))
         if ((self.instanceUserInfo.id != self.userInfo.id)
-            and not(self.userInfo.anonymous)):
-            retval = '{} &#8212; {}'.format(retval,
-                                            userInfo_to_anchor(self.userInfo))
+                and not(self.userInfo.anonymous)):
+            u = userInfo_to_anchor(self.userInfo)
+            retval = '{0} &#8212; {1}'.format(retval, u)
         return retval
 
 
@@ -117,7 +117,7 @@ class AddOldUserEvent(BasicAuditEvent):
     implements(IAuditEvent)
 
     def __init__(self, context, id, d, userInfo, instanceUserInfo,
-        siteInfo, groupInfo, instanceDatum, supplementaryDatum):
+                 siteInfo, groupInfo, instanceDatum, supplementaryDatum):
 
         BasicAuditEvent.__init__(self, context, id,
           ADD_OLD_USER, d, userInfo, instanceUserInfo,
