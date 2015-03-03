@@ -16,10 +16,12 @@ from __future__ import unicode_literals
 from urllib import quote
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
+from zope.i18n import translate
 from Products.GSGroupMember.groupmembership import GroupMembers
 from gs.content.email.base import GroupEmail, TextMixin
 from gs.group.member.list.queries import MembersQuery
-from gs.group.messages.topics.queries import TopicsQuery
+from gs.group.messages.topic.list.queries import TopicsQuery
+from . import GSMessageFactory as _
 UTF8 = 'utf-8'
 
 
@@ -52,18 +54,24 @@ class WelcomeHTMLNotification(GroupEmail):
         return retval
 
     def get_support_email(self, user, admin):
-        subj = 'Group Welcome'
+        subj = _('support-email-subject', 'Group welcome')
+        subject = quote(translate(subj).encode(UTF8))
         uu = '{}{}'.format(self.siteInfo.url, user.url)
         au = '{}{}'.format(self.siteInfo.url, admin.url)
-        msg = 'Hello,\n\nI was added to the group {group} by {adminName}\n'\
-              'and...\n\n--\nThis technical information may help you:\n  '\
-              'Group          {url}\n  Me             {userUrl}\n  '\
-              'Administrator  {adminUrl}\n'
-        body = msg.format(group=self.groupInfo.name, url=self.groupInfo.url,
-                          adminName=admin.name, userUrl=uu, adminUrl=au)
+        msg = _('support-email-body',
+                'Hello,\n\nI was added to the group ${group} by '
+                '${adminName}\n and...\n\n'
+                '--\nThis technical information may help you:\n'
+                '  Group          ${url}\n'
+                '  Me             ${userUrl}\n'
+                '  Administrator  ${adminUrl}\n',
+                mapping={'group': self.groupInfo.name,
+                         'url': self.groupInfo.url,
+                         'adminName': admin.name,
+                         'userUrl': uu, 'adminUrl': au})
+        body = quote(translate(msg).encode(UTF8))
         m = 'mailto:{to}?Subject={subj}&body={body}'
-        retval = m.format(to=self.email, subj=quote(subj),
-                          body=quote(body.encode(UTF8)))
+        retval = m.format(to=self.email, subj=subject, body=body)
         return retval
 
     @Lazy

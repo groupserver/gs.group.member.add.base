@@ -30,10 +30,11 @@ from .addfields import AddFields
 from .adder import Adder
 from .audit import ADD_NEW_USER, ADD_OLD_USER
 from .notifier import Notifier as NotifyAdd
+from . import GSMessageFactory as _
 
 
 class AddEditProfileForm(GroupForm):
-    label = 'Add a new group member'
+    label = _('add-member-title', 'Add a group member')
     pageTemplateFileName = 'browser/templates/edit_profile_add.pt'
     template = ZopeTwoPageTemplateFile(pageTemplateFileName)
 
@@ -66,7 +67,8 @@ class AddEditProfileForm(GroupForm):
             self.request, form=self, data=data,
             ignore_request=ignore_request)
 
-    @form.action(label='Add', failure='handle_add_action_failure')
+    @form.action(label=_('add-button', 'Add'), name='add',
+                 failure='handle_add_action_failure')
     def handle_add(self, action, data):
         adder = Adder(self.context, self.groupInfo, self.adminInfo)
         toAddr = sanitise_address(data['toAddr'])
@@ -93,9 +95,10 @@ class AddEditProfileForm(GroupForm):
 
     def handle_add_action_failure(self, action, data, errors):
         if len(errors) == 1:
-            self.status = '<p>There is an error:</p>'
+            s = _('single-error', 'There is an error:')
         else:
-            self.status = '<p>There are errors:</p>'
+            s = _('multiple-errors', 'There are errors:')
+        self.status = '<p>{0}</p>'.format(s)
 
     @Lazy
     def addFields(self):

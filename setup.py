@@ -78,7 +78,7 @@ setup(name='gs.group.member.add.base',
           'gs.group.member.list',
           'gs.group.member.viewlet',
           # The notification has a list of topics
-          'gs.group.messages.topics',
+          'gs.group.messages.topic.list',
           'gs.help',
           'gs.profile.email.base',
           'gs.profile.notify',

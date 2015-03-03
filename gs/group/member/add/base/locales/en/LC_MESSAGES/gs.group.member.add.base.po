@@ -1,0 +1,128 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2015-03-03 23:16+0000\n"
+"PO-Revision-Date: 2015-03-03 15:29-0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#. Default: "Add"
+#: ./add.py:70
+msgid "add-button"
+msgstr "Add"
+
+#. Default: "<strong>Add</strong> a member"
+#: ./browser/templates/add_link.pt:5
+msgid "add-link"
+msgstr "<strong>Add</strong> a member"
+
+#. Default: "Add a group member"
+#: ./add.py:37
+msgid "add-member-title"
+msgstr "Add a group member"
+
+#. Default: "To add a new member to the group enter the user's details below and click the ${addButton} button. A new member will be created, and the member will be sent a notification letting him or her know they have been joined to ${groupName}. You must fill out all required fields below, which are marked <span class=\"required\"><label style=\"display:inline;margin:0px;\">like this</label></span>."
+#: ./browser/templates/edit_profile_add.pt:52
+msgid "add-page-intro"
+msgstr "To add a new member to the group enter the user's details below and click the ${addButton} button. A new member will be created, and the member will be sent a notification letting him or her know they have been joined to ${groupName}. You must fill out all required fields below, which are marked <span class=\\\"required\\\"><label style=\\\"display:inline;margin:0px;\\\">like this</label></span>."
+
+#. Default: "The new member will receive a notification from you that he or she is a group member. Select the email address you wish to use for the notification."
+#: ./browser/templates/edit_profile_add.pt:67
+msgid "add-page-notification-description"
+msgstr "The new member will receive a notification from you that he or she is a group member. Select the email address you wish to use for the notification."
+
+#. Default: "Notification"
+#: ./browser/templates/edit_profile_add.pt:66
+msgid "add-page-notification-heading"
+msgstr "Notification"
+
+#. Default: "The following fields are the standard profile fields on ${siteName}. You must fill out all required fields, but you can ignore the other fields."
+#: ./browser/templates/edit_profile_add.pt:84
+msgid "add-page-profile-description"
+msgstr "The following fields are the standard profile fields on ${siteName}. You must fill out all required fields, but you can ignore the other fields."
+
+#. Default: "Standard Profile Information"
+#: ./browser/templates/edit_profile_add.pt:79
+msgid "add-page-profile-heading"
+msgstr "Standard profile information"
+
+#. Default: "You may optionally enter other parts of the new member's profile"
+#: ./browser/templates/edit_profile_add.pt:96
+msgid "add-page-profile-optional-toggle"
+msgstr "You may optionally enter other parts of the new member's profile"
+
+#. Default: "Add a member: ${groupName} ${siteName}"
+#: ./browser/templates/edit_profile_add.pt:11
+msgid "add-page-title"
+msgstr "Add a member: ${groupName}: ${siteName}"
+
+#. Default: "This form should only be used when you have <strong>absolute certainty</strong> that the person wishes to be a member of this group. Otherwise, please use the <a href=\"admin_join.html\">Invite a New Group Member</a> form instead."
+#: ./browser/templates/edit_profile_add.pt:58
+msgid "add-page-warning"
+msgstr "This form should only be used when you have <strong>absolute certainty</strong> that the person wishes to be a member of this group. Otherwise, please use the <a href=\"admin_join.html\">Invite a New Group Member</a> form instead."
+
+#. Default: "<li>The person with the email address ${email} &#8213; ${user} &#8213; is already a member of ${group}. No changes to the profile of ${user} have been made.</li>"
+#: ./adder.py:64
+msgid "existing-member-msg"
+msgstr "<li>The person with the email address ${email} &#8213; ${user} &#8213; is already a member of ${group}. No changes to the profile of ${user} have been made.</li>"
+
+#. Default: "<li>Adding the existing participant with  the email address ${email} &#8213; ${user} &#8213; to ${group}.</li>"
+#: ./adder.py:86
+msgid "existing-profile-msg"
+msgstr "<li>Adding the existing participant with  the email address ${email} &#8213; ${user} &#8213; to ${group}.</li>"
+
+#. Default: "There are errors:"
+#: ./add.py:100
+msgid "multiple-errors"
+msgstr "There are errors:"
+
+#. Default: "<li>A profile for ${user} has been created, and given the email address ${email}.</li>\n<li>${user} has been joined to ${group}.</li>\n"
+#: ./adder.py:117
+msgid "new-profile-member"
+msgstr ""
+"<li>A profile for ${user} has been created, and given the email address ${email}.</li>\n"
+"<li>${user} has been joined to ${group}.</li>\n"
+
+#. Default: "There is an error:"
+#: ./add.py:98
+msgid "single-error"
+msgstr "There is an error:"
+
+#. Default: "Site home"
+#: ./browser/templates/edit_profile_add.pt:28
+msgid "site-home-link"
+msgstr "Site homepage"
+
+#. Default: "Hello,\n\nI was added to the group ${group} by ${adminName}\n and...\n\n--\nThis technical information may help you:\n  Group          ${url}\n  Me             ${userUrl}\n  Administrator  ${adminUrl}\n"
+#: ./notification.py:61
+msgid "support-email-body"
+msgstr ""
+"Hello,\n"
+"\n"
+"I was added to the group ${group} by ${adminName}\n"
+"and...\n"
+"\n"
+"--\n"
+"This technical information may help you:\n"
+"  Group          ${url}\n"
+"  Me             ${userUrl}\n"
+"  Administrator  ${adminUrl}\n"
+
+#. Default: "Group welcome"
+#: ./notification.py:57
+msgid "support-email-subject"
+msgstr "Group welcome"
+
+#. Default: "Welcome to ${groupName}"
+#: ./notifier.py:27
+msgid "welcome-subject"
+msgstr "Welcome to ${groupName}"
+

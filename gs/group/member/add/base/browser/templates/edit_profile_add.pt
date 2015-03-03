@@ -1,12 +1,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="gs.group.member.add.base"
       metal:use-macro="context/@@groupserver_full_layout/page">
   <head>
-    <title metal:fill-slot="title">
-      <tal:block replace="string:${view/label}: ${view/groupInfo/name}: ${view/siteInfo/name}">
-        Edit Profile
-      </tal:block>
+    <title metal:fill-slot="title" i18n:translate="add-page-title">
+      Add a member:
+      <tal:block i18n:name="groupName" replace="view/groupInfo/name"/>
+      <tal:block i18n:name="siteName" replace="view/siteInfo/name"/>
     </title>
     <tal:block metal:fill-slot="metadata">
       <link rel="up" href="#"
@@ -24,7 +26,7 @@
            href="/" title="Home" class="icon-alone">
           <span aria-hidden="true" data-icon="&#x2302;"></span>
           <span class="screen-reader-text"
-                tal:content="string:${view/siteInfo/name} Homepage">Home</span></a>
+                i18n:translate="site-home-link">Site home</span></a>
       </li>
       <li>
         <a class="group"
@@ -38,34 +40,35 @@
           action="." tal:attributes="action request/URL" id="edit-profile"
           class="gs-content-js-required">
       <h1 tal:content="view/label">Edit Profile</h1>
-      <p>
+      <p i18n:translate="add-page-intro">
         To add a new member to the group enter the user's details below
         and click the
-        <samp class="button"
+        <samp class="button" i18n:name="addButton"
               tal:define="action python:[a for a in view.actions][0].label"
               tal:content="action">Big R</samp>
         button.
         A new member will be created, and the member will be sent a
         notification letting him or her know they have been joined to
-        <span class="group"
+        <span class="group" i18n:name="groupName"
               tal:content="python:view.groupInfo.name">this group</span>.
         You must fill out all required fields below, which are marked
         <span class="required"><label style="display:inline;margin:0px;">like
         this</label></span>.
       </p>
-      <p class="alert">
+      <p class="alert" i18n:translate="add-page-warning">
         This form should only be used when you have
-        <strong>absolute certainty</strong> that the person wishes to be a
-        member of this group.
+        <strong>absolute certainty</strong> that the person
+        wishes to be a member of this group.
         Otherwise, please use the
         <a href="admin_join.html">Invite a New Group Member</a> form instead.
       </p>
       <div id="delivery" class="section">
-        <h2>Notification</h2>
-        <p>
-          The new member will receive a notification from you that he or
-          she is a group member.
-          Select the email address you wish to use for the notification.
+        <h2 i18n:translate="add-page-notification-heading">Notification</h2>
+        <p i18n:translate="add-page-notification-description">
+          The new member will receive a notification from you
+          that he or she is a group member.
+          Select the email address you wish to use for the
+          notification.
         </p>
         <tal:block define="widgets view/adminWidgets">
           <tal:block
@@ -73,12 +76,16 @@
         </tal:block>
       </div>
       <div id="standardProfileFields" class="section">
-        <h2>Standard Profile Information</h2>
-        <p>The following fields are the standard profile fields on
-        <span class="site"
-              tal:content="python:view.siteInfo.name">this site</span>.
-        You must fill out all required fields, but you can ignore
-        the other fields.</p>
+        <h2 i18n:translate="add-page-profile-heading">
+          Standard Profile Information
+        </h2>
+        <p i18n:translate="add-page-profile-description">
+          The following fields are the standard profile fields on
+          <span class="site" i18n:name="siteName"
+                tal:content="python:view.siteInfo.name">this site</span>.
+          You must fill out all required fields, but you can ignore
+          the other fields.
+        </p>
         <tal:block define="widgets view/requiredProfileWidgets">
           <tal:block
             replace="structure provider:groupserver.FormWidgets"/>
@@ -86,7 +93,9 @@
       </div><!--standardProfileFields-->
       <div id="advancedProfileFields" class="disclosureWidget">
         <p>
-          <a class="disclosureButton" href="javascript:showHideDisclosure('advancedProfileFields')">You may optionally enter other parts of the new member's profile</a>
+          <a class="disclosureButton" href="javascript:showHideDisclosure('advancedProfileFields')"
+             i18n:translate="add-page-profile-optional-toggle">You may
+          optionally enter other parts of the new member's profile</a>
         </p>
         <div class="disclosureShowHide" style="display: none;">
           <tal:block define="widgets view/optionalProfileWidgets">

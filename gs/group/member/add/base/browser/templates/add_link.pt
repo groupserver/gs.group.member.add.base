@@ -1,4 +1,8 @@
-<li id="gs-group-member-add-admin-link">
+<li id="gs-group-member-add-admin-link"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="gs.group.member.add.base">
   <a tal:attributes="href string:${view/groupInfo/relative_url}/admin_add.html"
-     href="admin_add.html"><strong>Add</strong> a member</a>
+     href="admin_add.html"
+     i18n:translate="add-link"><strong>Add</strong> a member</a>
 </li>

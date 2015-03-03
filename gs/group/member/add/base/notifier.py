@@ -16,7 +16,7 @@ from __future__ import unicode_literals
 from zope.i18n import translate
 from gs.content.email.base import GroupNotifierABC
 from gs.profile.notify import MessageSender
-from . import GSMessageSender as _
+from . import GSMessageFactory as _
 
 
 class Notifier(GroupNotifierABC):

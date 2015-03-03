@@ -134,9 +134,6 @@ class AddOldUserEvent(BasicAuditEvent):
           self.siteInfo.name, self.siteInfo.id)
         return retval
 
-    def __str__(self):
-        return unicode(self).encode('ascii', 'ignore')
-
     @property
     def xhtml(self):
         cssClass = 'audit-event profile-add-event-{}'.format(self.code)
@@ -178,9 +175,6 @@ class AddExistingMemberEvent(BasicAuditEvent):
           self.groupInfo.name, self.groupInfo.id,
           self.siteInfo.name, self.siteInfo.id)
         return retval
-
-    def __str__(self):
-        return unicode(self).encode('ascii', 'ignore')
 
     @property
     def xhtml(self):

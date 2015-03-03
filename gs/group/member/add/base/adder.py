@@ -15,6 +15,7 @@
 from __future__ import absolute_import, unicode_literals
 from zope.component import createObject
 from zope.formlib import form
+from zope.i18n import translate
 from gs.group.member.base.utils import user_member_of_group
 from gs.group.member.join.interfaces import IGSJoiningUser
 from gs.profile.email.base import NewEmailAddress, EmailAddressExists, \
@@ -26,6 +27,7 @@ from Products.GSProfile.utils import create_user_from_email, \
     enforce_schema
 from .addfields import AddFields
 from .audit import Auditor, ADD_NEW_USER, ADD_OLD_USER, ADD_EXISTING_MEMBER
+from . import GSMessageFactory as _
 
 
 class Adder(object):
@@ -55,12 +57,18 @@ class Adder(object):
         userInfo = createObject('groupserver.UserFromId', self.context,
                                 user.getId())
         auditor = self.get_auditor(userInfo)
+        e = '<code class="email">{0}</code>'.format(toAddr)
         if user_member_of_group(user, self.groupInfo):
             status = ADD_EXISTING_MEMBER
             auditor.info(status, toAddr)
-            m = '<li>The person with the email address {email} &#8213; '\
-                '{user} &#8213; is already a member of {group}. No '\
-                'changes to the profile of {user} have been made.</li>'
+            m = _('existing-member-msg',
+                  '<li>The person with the email address ${email} '
+                  '&#8213; ${user} &#8213; is already a member of '
+                  '${group}. No changes to the profile of ${user} have '
+                  'been made.</li>',
+                  mapping={'email': e,
+                           'user': userInfo_to_anchor(userInfo),
+                           'group': groupInfo_to_anchor(self.groupInfo)})
         else:
             status = ADD_OLD_USER
             auditor.info(status, toAddr)
@@ -75,11 +83,14 @@ class Adder(object):
                 evu.add_verification_id(verificationId)
                 evu.verify_email(verificationId)
 
-            m = '<li>Adding the existing participant with  the email '\
-                'address {email} &#8213; {user} &#8213; to {group}</li>'
-        e = '<code class="email">{0}</code>'.format(toAddr)
-        msg = m.format(email=e, user=userInfo_to_anchor(userInfo),
-                       group=groupInfo_to_anchor(self.groupInfo))
+            m = _('existing-profile-msg',
+                  '<li>Adding the existing participant with  the email '
+                  'address ${email} &#8213; ${user} &#8213; to '
+                  '${group}.</li>',
+                  mapping={'email': e,
+                           'user': userInfo_to_anchor(userInfo),
+                           'group': groupInfo_to_anchor(self.groupInfo)})
+        msg = translate(m)
         retval = (msg, userInfo, status)
         return retval
 
@@ -102,13 +113,14 @@ class Adder(object):
         auditor.info(status, toAddr)
         joininguser = IGSJoiningUser(userInfo)
         joininguser.silent_join(self.groupInfo)
-        m = '<li>A profile for {user} has been created, and given the '\
-            'email address {email}.</li>\n<li>{user} has been joined to '\
-            '{group}.</li>\n'
-        u = userInfo_to_anchor(userInfo)
         e = '<code class="email">{0}</code>'.format(toAddr)
-        g = groupInfo_to_anchor(self.groupInfo)
-        msg = m.format(user=u, email=e, group=g)
+        msg = _('new-profile-member',
+                '<li>A profile for ${user} has been created, and given the '
+                'email address ${email}.</li>\n'
+                '<li>${user} has been joined to ${group}.</li>\n',
+                mapping={'email': e,
+                         'user': userInfo_to_anchor(userInfo),
+                         'group': groupInfo_to_anchor(self.groupInfo)})
         retval = (msg, userInfo, status)
         return retval
 
@@ -124,5 +136,4 @@ class Adder(object):
     def get_auditor(self, userInfo):
         auditor = Auditor(self.groupInfo.siteInfo, self.groupInfo,
                           self.adminInfo, userInfo)
-
         return auditor
