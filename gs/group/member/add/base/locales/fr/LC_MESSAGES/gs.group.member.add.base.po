@@ -1,11 +1,12 @@
 # 
 # Translators:
+# Razique Mahroua <razique.mahroua@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: gs.group.member.add.base\n"
 "POT-Creation-Date: 2015-03-03 23:16+0000\n"
-"PO-Revision-Date: 2015-03-03 23:38+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-03-11 19:48+0000\n"
+"Last-Translator: Michael JasonSmith <mpj17@onlinegroups.net>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/gs-group-member-add-base/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,17 +21,17 @@ msgstr ""
 #. Default: "Add"
 #: ./add.py:70
 msgid "add-button"
-msgstr ""
+msgstr "Ajouter"
 
 #. Default: "<strong>Add</strong> a member"
 #: ./browser/templates/add_link.pt:5
 msgid "add-link"
-msgstr ""
+msgstr "<strong>Ajouter</strong> un membre"
 
 #. Default: "Add a group member"
 #: ./add.py:37
 msgid "add-member-title"
-msgstr ""
+msgstr "Ajouter un membre dans le groupe"
 
 #. Default: "To add a new member to the group enter the user's details below
 #. and click the ${addButton} button. A new member will be created, and the
@@ -40,41 +41,41 @@ msgstr ""
 #. style=\"display:inline;margin:0px;\">like this</label></span>."
 #: ./browser/templates/edit_profile_add.pt:52
 msgid "add-page-intro"
-msgstr ""
+msgstr "Pour ajouter un nouveau membre dans ce groupe, veuillez entrer les informations de l'utilisateur ci-dessous, et cliquer sur le button ${addButton}. A nouveau membre sera ajouté, et il recevra une notification, afin de lui faire savoir qu'il a été ajouté au groupe ${groupName}. Veuillez remplir tous les champs requis ci-dessous, signalés <span class=\\\"required\\\"><label style=\\\"display:inline;margin:0px;\\\">comme ceci</label></span>."
 
 #. Default: "The new member will receive a notification from you that he or
 #. she is a group member. Select the email address you wish to use for the
 #. notification."
 #: ./browser/templates/edit_profile_add.pt:67
 msgid "add-page-notification-description"
-msgstr ""
+msgstr "Le nouveau membre recevra une notification de votre part, afin de lui indiquer qu'il ou elle est membre du groupe. Veuillez sélectionner l'adresse à utiliser pour la notification."
 
 #. Default: "Notification"
 #: ./browser/templates/edit_profile_add.pt:66
 msgid "add-page-notification-heading"
-msgstr ""
+msgstr "Notification"
 
 #. Default: "The following fields are the standard profile fields on
 #. ${siteName}. You must fill out all required fields, but you can ignore the
 #. other fields."
 #: ./browser/templates/edit_profile_add.pt:84
 msgid "add-page-profile-description"
-msgstr ""
+msgstr "Les champs suivants sont les champs standards des profils pour le site ${siteName}. Vous devez remplir tous les champs obligatoires, mais vous pouvez laisser les autres champs vides."
 
 #. Default: "Standard Profile Information"
 #: ./browser/templates/edit_profile_add.pt:79
 msgid "add-page-profile-heading"
-msgstr ""
+msgstr "Information du profil"
 
 #. Default: "You may optionally enter other parts of the new member's profile"
 #: ./browser/templates/edit_profile_add.pt:96
 msgid "add-page-profile-optional-toggle"
-msgstr ""
+msgstr "Il vous est également possible de fournir des informations supplémentaires sur le profil du nouveau membre"
 
 #. Default: "Add a member: ${groupName} ${siteName}"
 #: ./browser/templates/edit_profile_add.pt:11
 msgid "add-page-title"
-msgstr ""
+msgstr "Ajouter un membre : ${groupName} : ${siteName}"
 
 #. Default: "This form should only be used when you have <strong>absolute
 #. certainty</strong> that the person wishes to be a member of this group.
@@ -82,55 +83,55 @@ msgstr ""
 #. Member</a> form instead."
 #: ./browser/templates/edit_profile_add.pt:58
 msgid "add-page-warning"
-msgstr ""
+msgstr "Ce formulaire ne devrait être utiliser que lorsque vous êtes <strong>vraiment certain</strong> que la personne souhaite être membre du groupe. Si ça n'est pas le cas, veuillez utiliser le formulaire permettant d' <a href=\"admin_join.html\">Inviter un Nouveau Membre dans le Groupe</a>."
 
 #. Default: "<li>The person with the email address ${email} &#8213; ${user}
 #. &#8213; is already a member of ${group}. No changes to the profile of
 #. ${user} have been made.</li>"
 #: ./adder.py:64
 msgid "existing-member-msg"
-msgstr ""
+msgstr "<li>La personne avec l'adresse e-mail ${email} &#8213; ${user} &#8213;  est déjà memebre du groupe ${group}. Aucun changement au profil de l'utilisateur ${user} n'a été effectué.</li>"
 
 #. Default: "<li>Adding the existing participant with  the email address
 #. ${email} &#8213; ${user} &#8213; to ${group}.</li>"
 #: ./adder.py:86
 msgid "existing-profile-msg"
-msgstr ""
+msgstr "<li>Ajoutant le participant existant, avec l'adresse e-mail ${email} &#8213; ${user} &#8213; au groupe ${group}.</li>"
 
 #. Default: "There are errors:"
 #: ./add.py:100
 msgid "multiple-errors"
-msgstr ""
+msgstr "Des erreurs sont survenues :"
 
 #. Default: "<li>A profile for ${user} has been created, and given the email
 #. address ${email}.</li>\n<li>${user} has been joined to ${group}.</li>\n"
 #: ./adder.py:117
 msgid "new-profile-member"
-msgstr ""
+msgstr "<li>Un nouveau profil pour l'utilisateur ${user} a été créé, avec l'adresse email ${email}.</li>\n<li>${user} a été ajouté au groupe ${group}.</li>"
 
 #. Default: "There is an error:"
 #: ./add.py:98
 msgid "single-error"
-msgstr ""
+msgstr "Une erreur est survenue :"
 
 #. Default: "Site home"
 #: ./browser/templates/edit_profile_add.pt:28
 msgid "site-home-link"
-msgstr ""
+msgstr "Page d'accueil"
 
 #. Default: "Hello,\n\nI was added to the group ${group} by ${adminName}\n
 #. and...\n\n--\nThis technical information may help you:\n  Group
 #. ${url}\n  Me             ${userUrl}\n  Administrator  ${adminUrl}\n"
 #: ./notification.py:61
 msgid "support-email-body"
-msgstr ""
+msgstr "Bonjour,\n\nJ'ai été ajouté dans le groupe ${groupe} par ${adminName}\net...\n\n...\nCes informations techniques pourraient vous aider : \nGroupe : ${url}\nMoi : ${userUrl}\nAdminstrateur : ${adminUrl}"
 
 #. Default: "Group welcome"
 #: ./notification.py:57
 msgid "support-email-subject"
-msgstr ""
+msgstr "E-mail de bienvenue"
 
 #. Default: "Welcome to ${groupName}"
 #: ./notifier.py:27
 msgid "welcome-subject"
-msgstr ""
+msgstr "Bienvenue dans le groupe ${groupName}"
