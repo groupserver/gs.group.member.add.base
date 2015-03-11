@@ -1,6 +1,13 @@
 Changelog
 =========
 
+3.3.1 (2015-03-11)
+------------------
+
+* [FR] Adding a French translation, thanks to `Razique Mahroua`_
+
+.. _Razique Mahroua: https://www.transifex.com/accounts/profile/Razique/
+
 3.3.0 (2015-03-03)
 ------------------
 
