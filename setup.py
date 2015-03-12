@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ############################################################################
 #
-# Copyright © 2010, 2011, 2012, 2013, 2014 OnlineGroups.net and
+# Copyright © 2010, 2011, 2012, 2013, 2014, 2015 OnlineGroups.net and
 # Contributors.
 #
 # All Rights Reserved.
@@ -39,6 +39,7 @@ setup(name='gs.group.member.add.base',
           "Intended Audience :: Developers",
           'License :: OSI Approved :: Zope Public License',
           "Natural Language :: English",
+          "Natural Language :: French",
           "Operating System :: OS Independent",
           "Programming Language :: Python",
           "Programming Language :: Python :: 2",
@@ -62,6 +63,8 @@ setup(name='gs.group.member.add.base',
           'zope.cachedescriptors',
           'zope.component',
           'zope.formlib',
+          'zope.i18n[compile]',
+          'zope.i18nmessageid'
           'zope.interface',
           'zope.tal',
           'zope.tales',
