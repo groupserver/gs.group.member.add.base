@@ -64,7 +64,7 @@ setup(name='gs.group.member.add.base',
           'zope.component',
           'zope.formlib',
           'zope.i18n[compile]',
-          'zope.i18nmessageid'
+          'zope.i18nmessageid',
           'zope.interface',
           'zope.tal',
           'zope.tales',
