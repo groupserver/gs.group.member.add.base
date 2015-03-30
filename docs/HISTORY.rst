@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.3.2 (2015-03-30)
+------------------
+
+* Fixing the feedback text on the *Add a member* page
+
 3.3.1 (2015-03-11)
 ------------------
 
