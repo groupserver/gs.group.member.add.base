@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ############################################################################
 #
-# Copyright © 2014 OnlineGroups.net and Contributors.
+# Copyright © 2014, 2015 OnlineGroups.net and Contributors.
 # All Rights Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
@@ -17,6 +17,7 @@ import md5
 import time
 from zope.cachedescriptors.property import Lazy
 from zope.formlib import form
+from zope.i18n import translate
 from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
 from Products.GSProfile.edit_profile import wym_editor_widget
 from Products.XWFCore.XWFUtils import convert_int2b62
@@ -72,7 +73,8 @@ class AddEditProfileForm(GroupForm):
     def handle_add(self, action, data):
         adder = Adder(self.context, self.groupInfo, self.adminInfo)
         toAddr = sanitise_address(data['toAddr'])
-        msg, userInfo, status = adder.add(toAddr, data)
+        m, userInfo, status = adder.add(toAddr, data)
+        msg = translate(m)
         self.status = '<ul>\n{0}\n</ul>'.format(msg)
 
         # Tell the user
@@ -98,7 +100,7 @@ class AddEditProfileForm(GroupForm):
             s = _('single-error', 'There is an error:')
         else:
             s = _('multiple-errors', 'There are errors:')
-        self.status = '<p>{0}</p>'.format(s)
+        self.status = '<p>{0}</p>'.format(translate(s))
 
     @Lazy
     def addFields(self):
