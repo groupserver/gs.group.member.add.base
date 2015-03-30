@@ -84,8 +84,8 @@ class AddNewUserEvent(BasicAuditEvent):
                                  supplementaryDatum, SUBSYSTEM)
 
     def __unicode__(self):
-        r = 'Administrator %s (%s) adding a new user %s (%s) '\
-            'with address <%s> to join %s (%s) on %s (%s)'
+        r = 'Administrator {0} ({1}) adding a new user {2} ({3}) '\
+            'with address <{4}> to join {5} ({6}) on {7} ({8})'
         retval = r.format(self.userInfo.name, self.userInfo.id,
                           self.instanceUserInfo.name,
                           self.instanceUserInfo.id, self.instanceDatum,
