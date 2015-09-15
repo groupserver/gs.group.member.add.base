@@ -1,6 +1,15 @@
 Changelog
 =========
 
+3.3.3 (2015-09-15)
+------------------
+
+* [DE] Updating the German translation, thanks to Cousin Clara
+* [EN] ``s/Dear/Hello/g`` in the *Welcome* notification
+* Using the actual support email address, rather than the group
+  email address, in the HTML form of the *Welcome* notification,
+  thanks to Paul for spotting that
+
 3.3.2 (2015-03-30)
 ------------------
 
