@@ -17,7 +17,7 @@
                      userInfo options/userInfo | view/loggedInUserInfo;
                      adminInfo options/adminInfo | view/loggedInUserInfo;">
       <p>
-        Dear
+        Hello
         <span tal:content="userInfo/name">New Member</span>,
       </p>
       <!-- Explain what has happened.-->
