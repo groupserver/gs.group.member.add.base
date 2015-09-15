@@ -54,6 +54,7 @@ class WelcomeHTMLNotification(GroupEmail):
         return retval
 
     def get_support_email(self, user, admin):
+        to = self.siteInfo.get_support_email()
         subj = _('support-email-subject', 'Group welcome')
         subject = quote(translate(subj).encode(UTF8))
         uu = '{}{}'.format(self.siteInfo.url, user.url)
@@ -71,7 +72,7 @@ class WelcomeHTMLNotification(GroupEmail):
                          'userUrl': uu, 'adminUrl': au})
         body = quote(translate(msg).encode(UTF8))
         m = 'mailto:{to}?Subject={subj}&body={body}'
-        retval = m.format(to=self.email, subj=subject, body=body)
+        retval = m.format(to=to, subj=subject, body=body)
         return retval
 
     @Lazy
