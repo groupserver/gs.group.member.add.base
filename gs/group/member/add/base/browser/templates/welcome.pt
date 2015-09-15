@@ -58,7 +58,7 @@
           with the subject <code>Unsubscribe</code>.
         </li>
       </ul>
-
+      <hr/>
       <p>
         <!--   - You can set a password, and change things -->
         <a tal:attributes="href passwordLink"
@@ -66,39 +66,29 @@
         to gain access to the rich features of
         <span tal:content="view/groupInfo/name">This Group</span> on the web.
       </p>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td>
-              <p>
-                View the <strong>profiles</strong> of the members,
-                including:
-              </p>
-              <ul>
-                <li tal:content="adminInfo/name">The Administrator</li>
-                <tal:block repeat="name python:view.member_names(userInfo, adminInfo)">
-                  <li tal:content="name">Name</li>
-                </tal:block>
-                <li>
-                  The profile that
-                  <span tal:content="adminInfo/name">The Administrator</span>
-                created for you</li>
-              </ul>
-            </td>
-            <td>
-              <p>
-                View recent <strong>topics</strong>, like these:
-              </p>
-              <ul>
-                <tal:block repeat="topic view/topics">
-                  <li tal:content="topic">Topic</li>
-                </tal:block>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
+      <p>
+        View the <strong>profiles</strong> of the members,
+        including:
+      </p>
+      <ul>
+        <li tal:content="adminInfo/name">The Administrator</li>
+        <tal:block repeat="name python:view.member_names(userInfo, adminInfo)">
+          <li tal:content="name">Name</li>
+        </tal:block>
+        <li>
+          The profile that
+          <span tal:content="adminInfo/name">The Administrator</span>
+        created for you</li>
+      </ul>
+      <p>
+        View recent <strong>topics</strong>, like these:
+      </p>
+      <ul>
+        <tal:block repeat="topic view/topics">
+          <li tal:content="topic">Topic</li>
+        </tal:block>
+      </ul>
+      <hr/>
       <!--Troubleshooting/return/warranty/damage information-->
       <p>
         If you have any problems, email us at
