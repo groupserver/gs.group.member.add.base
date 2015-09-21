@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ############################################################################
 #
-# Copyright © 2013, 2014 OnlineGroups.net and Contributors.
+# Copyright © 2013, 2014, 2015 OnlineGroups.net and Contributors.
 # All Rights Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
@@ -12,8 +12,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ############################################################################
-from __future__ import unicode_literals
-from urllib import quote
+from __future__ import unicode_literals, absolute_import, print_function
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
 from zope.i18n import translate
@@ -49,14 +48,13 @@ class WelcomeHTMLNotification(GroupEmail):
     @Lazy
     def unsub(self):
         body = 'Please remove me from {}.'.format(self.groupInfo.name)
-        m = 'mailto:{to}?Subject=Unsubscribe&body={body}'
-        retval = m.format(to=self.email, body=quote(body.encode(UTF8)))
+        retval = self.mailto(self.email, 'Unsubscribe', body)
         return retval
 
     def get_support_email(self, user, admin):
         to = self.siteInfo.get_support_email()
         subj = _('support-email-subject', 'Group welcome')
-        subject = quote(translate(subj).encode(UTF8))
+        subject = translate(subj)
         uu = '{}{}'.format(self.siteInfo.url, user.url)
         au = '{}{}'.format(self.siteInfo.url, admin.url)
         msg = _('support-email-body',
@@ -70,9 +68,8 @@ class WelcomeHTMLNotification(GroupEmail):
                          'url': self.groupInfo.url,
                          'adminName': admin.name,
                          'userUrl': uu, 'adminUrl': au})
-        body = quote(translate(msg).encode(UTF8))
-        m = 'mailto:{to}?Subject={subj}&body={body}'
-        retval = m.format(to=to, subj=subject, body=body)
+        body = translate(msg)
+        retval = self.mailto(to, subject, body)
         return retval
 
     @Lazy
