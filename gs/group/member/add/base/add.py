@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ############################################################################
 #
-# Copyright © 2014, 2015 OnlineGroups.net and Contributors.
+# Copyright © 2014, 2015, 2016 OnlineGroups.net and Contributors.
 # All Rights Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
@@ -13,14 +13,12 @@
 #
 ############################################################################
 from __future__ import absolute_import, unicode_literals
-import md5
-import time
 from zope.cachedescriptors.property import Lazy
 from zope.formlib import form
 from zope.i18n import translate
 from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
 from Products.GSProfile.edit_profile import wym_editor_widget
-from Products.XWFCore.XWFUtils import convert_int2b62
+from gs.core import to_id
 from gs.content.form.base import select_widget
 from gs.group.base import GroupForm
 from gs.group.member.join.notify import NotifyNewMember as NotifyJoin,\
@@ -133,9 +131,7 @@ class AddEditProfileForm(GroupForm):
         return widgets
 
     def get_password_reset(self, userInfo, email):
-        s = time.asctime() + email + userInfo.name + self.siteInfo.name
-        vNum = long(md5.new(s).hexdigest(), 16)
-        resetId = str(convert_int2b62(vNum))
+        resetId = to_id(email + userInfo.name + self.siteInfo.name)
 
         passwordUser = IGSPasswordUser(userInfo)
         passwordUser.add_password_reset(resetId)
@@ -144,3 +140,4 @@ class AddEditProfileForm(GroupForm):
         retval = u.format(siteUrl=self.siteInfo.url, resetId=resetId)
         assert retval
         return retval
+
