@@ -9,7 +9,7 @@
 
   * You can read the posts from the other members of the group.
     You will receive an email whenever a member makes a post.
-    The email messages are easy to spot: the <em>subject</em> will
+    The email messages are easy to spot: the subject will
     start with <tal:block content="view/subj">the list title</tal:block>.
 
   * You can post to the group by sending an email to
