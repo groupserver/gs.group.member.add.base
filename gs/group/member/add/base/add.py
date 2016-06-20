@@ -21,8 +21,7 @@ from Products.GSProfile.edit_profile import wym_editor_widget
 from gs.core import to_id
 from gs.content.form.base import select_widget
 from gs.group.base import GroupForm
-from gs.group.member.join.notify import NotifyNewMember as NotifyJoin,\
-    NotifyAdmin
+from gs.group.member.join.notify import (NotifyNewMember as NotifyJoin, NotifyAdmin)
 from gs.profile.email.base import EmailUser, sanitise_address
 from gs.profile.password.interfaces import IGSPasswordUser
 from .addfields import AddFields
