@@ -1,6 +1,17 @@
 Changelog
 =========
 
+3.3.5 (2016-06-20)
+------------------
+
+* Fixing the password-link creation in the *Welcome* notification
+  — with thanks to Robert_ for spotting `the problem`_
+* Dropping some HTML from the plain-text version of the *Welcome*
+  notification
+
+.. _Robert: http://groupserver.org/p/1lPEQHbcXYdNuKp41Psm4S
+.. _the problem: http://groupserver.org/r/post/1cWESnyfBhWvJHPgEiZl5R
+
 3.3.4 (2015-09-21)
 ------------------
 
