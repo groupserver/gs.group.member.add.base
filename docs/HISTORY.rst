@@ -1,6 +1,15 @@
 Changelog
 =========
 
+3.3.6 (2016-08-09)
+------------------
+
+* [DE] Fixing the HTML in the German translation, thanks to
+  `Stephan Blendinger`_
+
+.. _Stephan Blendinger:
+   https://www.transifex.com/user/profile/stephanblendinger/
+
 3.3.5 (2016-06-20)
 ------------------
 
